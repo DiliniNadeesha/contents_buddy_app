@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:contents_buddy_app/model/contact.dart';
 import 'package:contents_buddy_app/service/contactService.dart';
+//import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 
 // Create the widget, SaveContact by inheriting StatefulWidget
@@ -19,6 +22,10 @@ class _SaveContactState extends State<SaveContact> {
   bool _validatePhoneNumber = false;
   bool _validateEmail = false;
   var _contactService=ContactService();
+
+  // bool isUploadImage = false;
+  // var selectedImage;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +51,10 @@ class _SaveContactState extends State<SaveContact> {
               Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  // children: [
+                  //   CircleAvatar(
+                  //     backgroundImage: isUploadImage && selectedImage != null ? FileImage(File(selectedImage)) : AssetImage('images/eliyana.jpg') as ImageProvider,
+                  //   ),
                   children: [
                     CircleAvatar(
                       radius: 50,
@@ -62,8 +73,8 @@ class _SaveContactState extends State<SaveContact> {
                           border: const OutlineInputBorder(),
                           hintText: 'Name',
                           labelText: 'Enter Name',
-                          errorText:
-                          _validateName ? 'Name Value Can\'t Be Empty' : null,
+                          icon: const Icon(Icons.person),
+                          errorText: _validateName ? 'Name Value Can\'t Be Empty' : null,
                         )),
                     const SizedBox(
                       height: 20.0,
@@ -74,9 +85,8 @@ class _SaveContactState extends State<SaveContact> {
                           border: const OutlineInputBorder(),
                           hintText: 'PhoneNumber',
                           labelText: 'Enter PhoneNumber',
-                          errorText: _validatePhoneNumber
-                              ? 'Phone Number Value Can\'t Be Empty'
-                              : null,
+                          icon: const Icon(Icons.phone),
+                          errorText: _validatePhoneNumber ? 'Phone Number Value Can\'t Be Empty' : null,
                         )),
                     const SizedBox(
                       height: 20.0,
@@ -87,9 +97,8 @@ class _SaveContactState extends State<SaveContact> {
                           border: const OutlineInputBorder(),
                           hintText: 'Email',
                           labelText: 'Enter Email',
-                          errorText: _validateEmail
-                              ? 'Email Value Can\'t Be Empty'
-                              : null,
+                          icon: const Icon(Icons.email),
+                          errorText: _validateEmail ? 'Email Value Can\'t Be Empty' : null,
                         )),
                     const SizedBox(
                       height: 20.0,
@@ -139,7 +148,8 @@ class _SaveContactState extends State<SaveContact> {
                         _contactPhoneNumberController.text = '';
                         _contactEmailController.text = '';
                       },
-                      child: const Text('Clear Details'))
+                      child: const Text('Clear Details')
+                  )
                 ],
               )
             ],
@@ -152,4 +162,5 @@ class _SaveContactState extends State<SaveContact> {
     );
   }
 }
+
 

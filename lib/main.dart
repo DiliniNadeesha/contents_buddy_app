@@ -108,7 +108,24 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: const Text("CONTENTS BUDDY"),
       ),
-      body: ListView.builder(
+
+    //   floatingActionButton:Row(
+    //     children: <Widget>[
+    //     FloatingActionButton(
+    //       onPressed: () => showSearch(context: context, delegate: Search()),
+    //     child: Icon(Icons.search),
+    //   ),
+    // ],
+    //   ),
+
+      // elevatedButton: ElevatedButton(
+      // floatingActionButton: FloatingActionButton(
+      //   child: Icon(Icons.search),
+      //   onPressed: () => showSearch(context: context, delegate: Search()),
+      // ),
+
+      body:
+      ListView.builder(
           itemCount: _contactList.length,
           itemBuilder: (context, index) {
             return Card(
@@ -171,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
             }
           });
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.contacts),
       ),
     );
   }

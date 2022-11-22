@@ -41,7 +41,8 @@ class _ViewContactState extends State<ViewContact> {
                           fontWeight: FontWeight.w600)),
                   Padding(
                     padding: const EdgeInsets.only(left: 30),
-                    child: Text(widget.contact.name ?? '', style: TextStyle(fontSize: 16)),
+                    child: Text(widget.contact.name ?? '',
+                        style: TextStyle(fontSize: 16)),
                   ),
                 ],
               ),
@@ -57,7 +58,8 @@ class _ViewContactState extends State<ViewContact> {
                           fontWeight: FontWeight.w600)),
                   Padding(
                     padding: const EdgeInsets.only(left: 25),
-                    child: Text(widget.contact.phoneNumber ?? '', style: TextStyle(fontSize: 16)),
+                    child: Text(widget.contact.phoneNumber ?? '',
+                        style: TextStyle(fontSize: 16)),
                   ),
                 ],
               ),
@@ -75,12 +77,14 @@ class _ViewContactState extends State<ViewContact> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(widget.contact.email ?? '', style: const TextStyle(fontSize: 16)),
+                  Text(widget.contact.email ?? '',
+                      style: const TextStyle(fontSize: 16)),
                 ],
               )
             ],
           ),
-        ));
+        )
+    );
   }
 }
 
