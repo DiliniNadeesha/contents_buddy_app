@@ -56,7 +56,7 @@ class _UpdateContactState extends State<UpdateContact> {
                     border: const OutlineInputBorder(),
                     hintText: 'Enter Name',
                     labelText: 'Name',
-                    errorText: _validateName ? 'Name Value Can\'t Be Empty' : null,
+                    errorText: _validateName ? 'Name Can\'t Be Empty' : null,
                     icon: const Icon(Icons.person),
                   )),
               const SizedBox(
@@ -66,9 +66,9 @@ class _UpdateContactState extends State<UpdateContact> {
                   controller: _contactPhoneNumberController,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
-                    hintText: 'Enter PhoneNumber',
-                    labelText: 'PhoneNumber',
-                    errorText: _validatePhoneNumber ? 'PhoneNumber Value Can\'t Be Empty' : null,
+                    hintText: 'Enter Phone Number',
+                    labelText: 'Phone Number',
+                    errorText: _validatePhoneNumber ? 'Phone Number Can\'t Be Empty' : null,
                     icon: const Icon(Icons.phone),
                   )),
               const SizedBox(
@@ -80,7 +80,7 @@ class _UpdateContactState extends State<UpdateContact> {
                     border: const OutlineInputBorder(),
                     hintText: 'Enter Email',
                     labelText: 'Email',
-                    errorText: _validateEmail ? 'Email Value Can\'t Be Empty' : null,
+                    errorText: _validateEmail ? 'Email Can\'t Be Empty' : null,
                     icon: const Icon(Icons.email),
                   )),
               const SizedBox(

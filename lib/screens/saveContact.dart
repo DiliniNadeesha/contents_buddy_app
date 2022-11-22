@@ -1,8 +1,7 @@
 import 'dart:io';
-
 import 'package:contents_buddy_app/model/contact.dart';
 import 'package:contents_buddy_app/service/contactService.dart';
-//import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 
 // Create the widget, SaveContact by inheriting StatefulWidget
@@ -23,8 +22,8 @@ class _SaveContactState extends State<SaveContact> {
   bool _validateEmail = false;
   var _contactService=ContactService();
 
-  // bool isUploadImage = false;
-  // var selectedImage;
+  bool isUploadImage = false;
+  var selectedImage;
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +50,18 @@ class _SaveContactState extends State<SaveContact> {
               Container(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: _imgPicker,
+                      child: CircleAvatar(
+                        backgroundImage: isUploadImage && selectedImage != null ? FileImage(File(selectedImage.path)) : AssetImage('images/eliyana.jpg') as ImageProvider,
+                      ),
+                    ),
                   // children: [
                   //   CircleAvatar(
-                  //     backgroundImage: isUploadImage && selectedImage != null ? FileImage(File(selectedImage)) : AssetImage('images/eliyana.jpg') as ImageProvider,
+                  //     radius: 50,
+                  //     backgroundImage: AssetImage('images/eliyana.jpg'),
                   //   ),
-                  children: [
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundImage: AssetImage('images/eliyana.jpg'),
-                    ),
                     SizedBox(
                       height: 20.0,
                       width: 150.0,
@@ -74,7 +76,7 @@ class _SaveContactState extends State<SaveContact> {
                           hintText: 'Name',
                           labelText: 'Enter Name',
                           icon: const Icon(Icons.person),
-                          errorText: _validateName ? 'Name Value Can\'t Be Empty' : null,
+                          errorText: _validateName ? 'Name Can\'t Be Empty' : null,
                         )),
                     const SizedBox(
                       height: 20.0,
@@ -83,10 +85,10 @@ class _SaveContactState extends State<SaveContact> {
                         controller: _contactPhoneNumberController,
                         decoration: InputDecoration(
                           border: const OutlineInputBorder(),
-                          hintText: 'PhoneNumber',
-                          labelText: 'Enter PhoneNumber',
+                          hintText: 'Phone Number',
+                          labelText: 'Enter Phone Number',
                           icon: const Icon(Icons.phone),
-                          errorText: _validatePhoneNumber ? 'Phone Number Value Can\'t Be Empty' : null,
+                          errorText: _validatePhoneNumber ? 'Phone Number Can\'t Be Empty' : null,
                         )),
                     const SizedBox(
                       height: 20.0,
@@ -98,7 +100,7 @@ class _SaveContactState extends State<SaveContact> {
                           hintText: 'Email',
                           labelText: 'Enter Email',
                           icon: const Icon(Icons.email),
-                          errorText: _validateEmail ? 'Email Value Can\'t Be Empty' : null,
+                          errorText: _validateEmail ? 'Email Can\'t Be Empty' : null,
                         )),
                     const SizedBox(
                       height: 20.0,
@@ -160,6 +162,16 @@ class _SaveContactState extends State<SaveContact> {
     ),
     ),
     );
+  }
+
+  _imgPicker() async{
+    ImagePicker().pickImage(source: ImageSource.gallery).then((value) async{
+      setState(() {
+        selectedImage = value;
+        isUploadImage = true;
+
+      });
+    });
   }
 }
 

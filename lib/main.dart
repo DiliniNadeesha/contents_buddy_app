@@ -79,8 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextButton.styleFrom(
                       primary: Colors.white, // foreground
                       backgroundColor: Colors.red),
-                  onPressed: ()  async{
-                    var result=await _contactService.deleteContact(contactId);
+                  onPressed: () async {
+                    var result = await _contactService.deleteContact(contactId);
                     if (result != null) {
                       Navigator.pop(context);
                       getAllContactDetails();
@@ -102,85 +102,96 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  // Search Contact List
+  void _searchSavedContacts(String value) {
+    setState(() {
+      _contactList = _contactList
+          .where((element) =>
+              element.name!.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("CONTENTS BUDDY"),
       ),
-
-    //   floatingActionButton:Row(
-    //     children: <Widget>[
-    //     FloatingActionButton(
-    //       onPressed: () => showSearch(context: context, delegate: Search()),
-    //     child: Icon(Icons.search),
-    //   ),
-    // ],
-    //   ),
-
-      // elevatedButton: ElevatedButton(
-      // floatingActionButton: FloatingActionButton(
-      //   child: Icon(Icons.search),
-      //   onPressed: () => showSearch(context: context, delegate: Search()),
-      // ),
-
-      body:
-      ListView.builder(
-          itemCount: _contactList.length,
-          itemBuilder: (context, index) {
-            return Card(
-              child: ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ViewContact(
-                            contact: _contactList[index],
-                          )));
-                },
-                leading: const Icon(Icons.person),
-                title: Text(_contactList[index].name ?? ''),
-                subtitle: Text(_contactList[index].phoneNumber ?? ''),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => UpdateContact(
-                                    contact: _contactList[index],
-                                  ))).then((data) {
-                            if (data != null) {
-                              getAllContactDetails();
-                              _showSuccessSnackBar(
-                                  'Contact Detail Updated Successfully');
-                            }
-                          });
-                          ;
-                        },
-                        icon: const Icon(
-                          Icons.edit,
-                          color: Colors.green,
-                        )),
-                    IconButton(
-                        onPressed: () {
-                          _deleteFormDialog(context, _contactList[index].id);
-                        },
-                        icon: const Icon(
-                          Icons.delete,
-                          color: Colors.red,
-                        ))
-                  ],
-                ),
+      body: Container(
+        //padding: EdgeInsets.all(5.0),
+        child: Column(children: [
+          TextFormField(
+            autofocus: false,
+            onChanged: (value) => _searchSavedContacts(value),
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              labelText: 'Search Contacts Here',
+              hintText: 'Search Your Contact',
+              hintStyle: const TextStyle(
+                fontSize: 15,
               ),
-            );
-          }),
+            ),
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+              itemCount: _contactList.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ViewContact(
+                                contact: _contactList[index],
+                              )));
+                    },
+                    leading: const Icon(Icons.person),
+                    title: Text(_contactList[index].name ?? ''),
+                    subtitle: Text(_contactList[index].phoneNumber ?? ''),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => UpdateContact(
+                                        contact: _contactList[index],
+                                      ))).then((data) {
+                                if (data != null) {
+                                  getAllContactDetails();
+                                  _showSuccessSnackBar(
+                                      'Contact Detail Updated Successfully');
+                                }
+                              });
+                              ;
+                            },
+                            icon: const Icon(
+                              Icons.edit,
+                              color: Colors.green,
+                            )),
+                        IconButton(
+                            onPressed: () {
+                              _deleteFormDialog(context, _contactList[index].id);
+                            },
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ))
+                      ],
+                    ),
+                  ),
+                );
+              }),
+        ]),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const SaveContact()))
+                  MaterialPageRoute(builder: (context) => const SaveContact()))
               .then((data) {
             if (data != null) {
               getAllContactDetails();
