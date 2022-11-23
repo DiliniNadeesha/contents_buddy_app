@@ -17,11 +17,12 @@ class Repository
     }
   }
 
-  //Insert Contact
+  //(Save)Insert Contact
   insertData(table, data) async {
     var connection = await database;
     return await connection?.insert(table, data);
   }
+
   //Read All Record
   readData(table) async {
     var connection = await database;
@@ -33,6 +34,7 @@ class Repository
     var connection = await database;
     return await connection?.query(table, where: 'id=?', whereArgs: [itemId]);
   }
+
   //Update Contact
   updateData(table, data) async {
     var connection = await database;

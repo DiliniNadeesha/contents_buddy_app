@@ -9,19 +9,23 @@ class ContactService
   ContactService(){
     _repository = Repository();
   }
+
   //Save Contact
   SaveContact(Contact contact) async{
     return await _repository.insertData('contacts', contact.contactMap());
   }
+
   //Read All Contacts
   readAllContacts() async{
     return await _repository.readData('contacts');
   }
+
   //Update Contact
   UpdateContact(Contact contact) async{
     return await _repository.updateData('contacts', contact.contactMap());
   }
 
+  //Delete Contact
   deleteContact(contactId) async {
     return await _repository.deleteDataById('contacts', contactId);
   }
